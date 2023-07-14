@@ -12,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @GetMapping
-    public ModelAndView index(){
+    public String index(){
         HashMap<String, String> map = new HashMap<>();
         //map.put("apelido","valor");
         //map.put("nome","zezinho");
-        map.put("nome","Agenda 2023");
-        return new ModelAndView("home/index",map);
+        map.put("nome","Seja bem vindo a Agenda 2023");
+        return "redirect:/login";
     }
 }

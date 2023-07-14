@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Projfabsoft2023Application {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(Projfabsoft2023Application.class, args);
 	}
-
 }

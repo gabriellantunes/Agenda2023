@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Inclua aqui a referência ao Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-container {
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body onload="alertUser()">
+<div th:replace="navbar"></div>
+
+<h1 class="title">Configurações</h1>
+
+<div class="info-container">
+
+  <form th:action="@{/usuario/(form)}"
+        method="POST"
+        th:object="${usuario}">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div class="form-group">
+      <label for="txtNome">Nome e Sobrenome</label>
+      <input type="text" class="form-control" th:field="*{nome}" id="txtNome" required>
+    </div>
+
+    <!--
+    <div class="form-group">
+      <label for="txtSenha">Senha</label>
+      <input type="password" class="form-control" th:field="*{senha}" id="txtSenha" required>
+    </div>
+    -->
+    <div class="form-group">
+      <label for="txtSenha">Senha</label>
+      <input type="text" class="form-control" th:field="*{senha}" id="txtSenha" required>
+    </div>
+
+    <div class="form-group">
+      <label for="txtTelefone">Telefone</label>
+      <input type="text" class="form-control" th:field="*{Telefone}" id="txtTelefone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="txtDataNascimento">Data de Nascimento</label>
+      <input type="date" class="form-control" th:field="*{dataNascimento}" id="txtDataNascimento" required>
+    </div>
+
+    <div class="form-group">
+      <label for="txtEmail">Email</label>
+      <input type="email" class="form-control" th:field="*{email}" id="txtEmail" required>
+    </div>
+
+    <div class="form-group">
+      <label for="txtEndereco">Endereço</label>
+      <input type="text" class="form-control" th:field="*{endereco}" id="txtEndereco" required>
+    </div>
+
+    <div class="form-group" style="display: flex; justify-content: space-between;">
+      <button type="button" class="btn btn-primary" onclick="location.href='/login'" style="margin-right: 10px;">
+        Voltar
+      </button>
+
+      <button id="updateButton" type="submit" class="btn btn-primary" style="margin-left: 10px;">
+        Atualizar
+      </button>
+    </div>
+  </form>
+</div>
+
+<script th:inline="javascript">
+
+/*<![CDATA[*/
+function alertUser() {
+  var username = /*[[${username}]]*/ 'username';
+  alert("Caro " + username + ", caso você faça uma atualização cadastral após a confirmação das informações você será redirecionado para a página inicial de login para validar as suas alterações.");
+}
+/*]]>*/
+
+document.getElementById('updateButton').addEventListener('click', function() {
+  alert('Atualizações cadastrais atualizadas com sucesso.');
+});
+
+</script>
+</body>
+</html>

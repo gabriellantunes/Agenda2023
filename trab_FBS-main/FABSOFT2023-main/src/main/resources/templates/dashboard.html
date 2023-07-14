@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard</title>
+  <!-- Inclua aqui a referência ao Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .title {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .info-container {
+      max-width: 500px;
+      margin: auto;
+      border: 1px solid black;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    #welcome-message {
+        font-size: 1.6em;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="navbar"></div>
+<div class="mt-5">
+  <h1 id="welcome-message" class="ml-3">Seja bem-vindo, <span th:text="${username}"></span>!</h1> <!-- Adicionado ml-3 para mover a mensagem para a esquerda -->
+
+  <h2 class="title">Seus lembretes:</h2> <!-- Adicionado esta linha para a mensagem "Seus lembretes:" -->
+
+  <div class="container">
+    <div class="row">  <!-- Para dispor os lembretes em formato de grade -->
+      <div th:each="lembrete : ${lembretes}" class="col-md-6">
+        <div class="info-container">
+          <h2 th:text="${lembrete.titulo}"></h2>
+          <p th:text="${lembrete.descricao}"></p>
+          <p th:text="${lembrete.dataHora}"></p>
+          <a th:href="@{'dashboard/editar/' + ${lembrete.id}}" class="btn btn-primary float-right">Editar</a>  <!-- Botão de edição -->
+          <div class="clearfix"></div>  <!-- Adicionado clearfix para limpar a flutuação -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+            <a th:href="@{/usuario/novo}"
+                class="btn btn-primary">Novo</a>
+            <table class="table" id="tabusuarios">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data Nascimento</th>
+                        <th>Endereço</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="umUsuario : ${listaUsuarios}">
+                        <td th:text="${umUsuario.nome}"></td>
+                        <td th:text="${umUsuario.dataNascimento}"></td>
+                        <td th:text="${umUsuario.endereco}"></td>
+                        <td th:text="${umUsuario.telefone}"></td>
+                        <td th:text="${umUsuario.email}"></td>
+                        <td><a class="btn btn-secondary" th:href="@{'/usuario/alterar/' + ${umUsuario.id }}">Alterar</a>
+                          <td><a class="btn btn-danger" th:href="@{'/usuario/remover/' + ${umUsuario.id }}">Excluir</a>
+
+                            <!--<button class="btn btn-danger js-delete"
+                                th:data-id="${umUsuario.id}">
+                                Excluir
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <div class="modal" tabindex="-1" id="modalusuario">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Excluir usuario</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Confirma a exclusão do usuario?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" id="btnnao" data-bs-dismiss="modal">Não</button>
+                  <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/script.js}"></script>
+    </body>
+</html>
