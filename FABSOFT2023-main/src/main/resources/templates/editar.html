@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Editar Lembrete</title>
+  <!-- Inclua aqui a referência ao Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script>
+    function confirmUpdate(event) {
+      event.preventDefault();
+      if(confirm("Você tem certeza que deseja atualizar este lembrete?")) {
+        alert("Lembrete editado com sucesso !!");
+        document.getElementById("editForm").submit();
+      }
+    }
+    function confirmDelete(event) {
+      event.preventDefault();
+      if(confirm("Você tem certeza que deseja excluir este lembrete?")) {
+        alert("Lembrete Excluído com sucesso !!");
+        document.getElementById("deleteForm").submit();
+      }
+    }
+  </script>
+</head>
+<body>
+<div th:replace="navbar"></div>
+<div class="container mt-5">
+  <h1>Editar Lembrete</h1>
+  <form id="editForm" th:action="@{'/dashboard/editar/' + ${lembrete.id}}" method="post" onsubmit="confirmUpdate(event)">
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input type="text" class="form-control" id="titulo" th:value="${lembrete.titulo}" name="titulo">
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea class="form-control" id="descricao" rows="3" name="descricao" th:text="${lembrete.descricao}"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dataHora">Data e Hora</label>
+      <input type="datetime-local" class="form-control" id="dataHora" th:value="${lembrete.dataHora}" name="dataHora">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary w-100">Atualizar Lembrete</button>
+    </div>
+  </form>
+
+  <form id="deleteForm" th:action="@{'/dashboard/excluir/' + ${lembrete.id}}" method="post" onsubmit="confirmDelete(event)">
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger w-100">Excluir</button>
+    </div>
+  </form>
+
+</div>
+</body>
+</html>

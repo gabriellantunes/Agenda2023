@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Novo lembrete</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-container {
+            max-width: 500px;
+            margin: auto;
+        }
+  </style>
+  <script>
+    function confirmCreate(event) {
+      event.preventDefault();
+      if(confirm("Você tem certeza que deseja criar este lembrete?")) {
+        alert("Lembrete criado com sucesso !!");
+        document.getElementById("createForm").submit();
+      }
+    }
+  </script>
+</head>
+<body>
+<div th:replace="navbar"></div>
+<h1 class="title">Novo lembrete</h1>
+
+<div class="info-container">
+  <form id="createForm" th:action="@{/lembretes/salvar}" th:object="${lembrete}" method="post" onsubmit="confirmCreate(event)">
+    <div class="form-group">
+      <label for="titulo">Título do lembrete</label>
+      <input type="text" class="form-control" th:field="*{titulo}" id="titulo" required/>
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea class="form-control" th:field="*{descricao}" id="descricao" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dataHora">Data</label>
+      <input type="datetime-local" class="form-control" th:field="*{dataHora}" id="dataHora" required/>
+    </div>
+    <div class="form-group" style="display: flex; justify-content: space-between;">
+      <button type="button" class="btn btn-primary" onclick="location.href='/login'" style="margin-right: 10px;">
+        Voltar
+      </button>
+
+      <button id="saveButton" type="submit" class="btn btn-primary" style="margin-left: 10px;">
+        Criar Lembrete
+      </button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
